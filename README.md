@@ -1,4 +1,4 @@
-# qtec_shop
+# Qtec Shop
 
 A new Flutter project.
 
