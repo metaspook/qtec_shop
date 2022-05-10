@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qtec_shop/widgets/widgets.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class ProductsPage extends StatelessWidget {
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 12),
+            margin: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
             padding: const EdgeInsets.only(left: 20, right: 5),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -37,26 +38,20 @@ class ProductsPage extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
+              physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 7),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
+                mainAxisSpacing: 35,
+                mainAxisExtent: 237.5,
               ),
               itemCount: 20,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.only(
-                    left: 6,
-                    right: 6,
-                    top: 15,
-                    bottom: 15,
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Text('Item $index'),
-                );
+                return ProductCard(
+                    title: index != 0
+                        ? 'লেস ক্লাসিক ফ্যামিলি সাইজ চিপস্ চিপস্'
+                        : 'Lays Classic Family Chips');
               },
             ),
           ),
