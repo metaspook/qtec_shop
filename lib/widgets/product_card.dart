@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qtec_shop/pages/product_detail_page.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard(
@@ -31,73 +32,86 @@ class ProductCard extends StatelessWidget {
               ),
               child: Stack(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      // left: 10,
-                      // right: 10,
-                      top: 10,
-                    ),
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          "assets/images/potato_chips_00.png",
-                          width: 75,
+                  GestureDetector(
+                    onTap: () {
+                      print('object');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ProductDetailPage(),
                         ),
-                        const SizedBox(height: 10),
-                        Text(title, style: _ProductCardTextStyle.title),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                  text: 'ক্রয়',
-                                  style: _ProductCardTextStyle.priceTitle,
-                                  children: [
-                                    TextSpan(text: ' ' * 5),
-                                    const TextSpan(
-                                      text: '\$ 20.00',
-                                      style: _ProductCardTextStyle.priceBig,
-                                    )
-                                  ]),
-                            ),
-                            const Text(
-                              '\$ 22.00',
-                              style: _ProductCardTextStyle.priceSecondary,
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                  text: 'বিক্রয়',
-                                  style: _ProductCardTextStyle.priceTitle,
-                                  children: [
-                                    const TextSpan(text: '  '),
-                                    TextSpan(
-                                      text: '\$ 25.00',
-                                      style: _ProductCardTextStyle.pricePrimary,
-                                    )
-                                  ]),
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                  text: 'লাভ',
-                                  style: _ProductCardTextStyle.priceTitle,
-                                  children: [
-                                    const TextSpan(text: '  '),
-                                    TextSpan(
-                                      text: '\$ 5.00',
-                                      style: _ProductCardTextStyle.pricePrimary,
-                                    )
-                                  ]),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 25),
-                      ],
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        // left: 10,
+                        // right: 10,
+                        top: 10,
+                      ),
+                      child: Column(
+                        children: [
+                          Image.asset(
+                            "assets/images/potato_chips_00.png",
+                            width: 75,
+                          ),
+                          const SizedBox(height: 10),
+                          Text(title, style: _ProductCardTextStyle.title),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                    text: 'ক্রয়',
+                                    style: _ProductCardTextStyle.priceTitle,
+                                    children: [
+                                      TextSpan(text: ' ' * 5),
+                                      const TextSpan(
+                                        text: '\$ 20.00',
+                                        style: _ProductCardTextStyle.priceBig,
+                                      )
+                                    ]),
+                              ),
+                              const Text(
+                                '\$ 22.00',
+                                style: _ProductCardTextStyle.priceSecondary,
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                text: TextSpan(
+                                    text: 'বিক্রয়',
+                                    style: _ProductCardTextStyle.priceTitle,
+                                    children: [
+                                      const TextSpan(text: '  '),
+                                      TextSpan(
+                                        text: '\$ 25.00',
+                                        style:
+                                            _ProductCardTextStyle.pricePrimary,
+                                      )
+                                    ]),
+                              ),
+                              RichText(
+                                text: TextSpan(
+                                    text: 'লাভ',
+                                    style: _ProductCardTextStyle.priceTitle,
+                                    children: [
+                                      const TextSpan(text: '  '),
+                                      TextSpan(
+                                        text: '\$ 5.00',
+                                        style:
+                                            _ProductCardTextStyle.pricePrimary,
+                                      )
+                                    ]),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 25),
+                        ],
+                      ),
                     ),
                   ),
                   if (stock == 0)
@@ -129,7 +143,7 @@ class ProductCard extends StatelessWidget {
                   child: Container(
                     // padding:
                     //     const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
-                    width: 122.5,
+                    width: 130,
                     height: 30,
                     decoration: BoxDecoration(
                       color: const Color.fromRGBO(255, 204, 204, 1),
@@ -156,9 +170,9 @@ class ProductCard extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 15),
+                        const SizedBox(width: 20),
                         Text('5 পিস', style: _ProductCardTextStyle.stockStatus),
-                        const SizedBox(width: 15),
+                        const SizedBox(width: 20),
                         Container(
                           // alignment: Alignment.topCenter,
                           height: 25, width: 25,
