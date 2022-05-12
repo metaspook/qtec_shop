@@ -305,9 +305,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     top: 80,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        QuantityButtonBar(),
-                        SizedBox(height: 5),
+                      children: [
+                        const QuantityButtonBar(),
+                        const SizedBox(height: 5),
                         CartHexButton(),
                       ],
                     ),
