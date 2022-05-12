@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qtec_shop/widgets/cart_hex_button.dart';
+import 'package:qtec_shop/widgets/quantity_button_bar.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);
@@ -38,6 +40,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         // toolbarTextStyle: const TextStyle(color: Colors.black),
       ),
       body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
@@ -68,7 +71,12 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           ),
           Flexible(
             child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 7.5),
+              padding: const EdgeInsets.only(
+                // top: 5,
+                bottom: 7.5,
+                left: 7.5,
+                right: 7.5,
+              ),
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
               // shrinkWrap: true,
@@ -79,8 +87,8 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 // print(_scrollController.offset.toString());
                 return Container(
                   margin: const EdgeInsets.only(
-                    top: 5,
-                    bottom: 25,
+                    // top: 5,
+                    // bottom: 25,
                     left: 7.5,
                     right: 7.5,
                   ),
@@ -97,162 +105,210 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(15),
-              child: Column(
+              child: Stack(
+                alignment: Alignment.center,
                 children: [
-                  const Text(
-                    "প্রিঞ্জেলস অনিওন চিপস ৪২ গ্রাম",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
                     children: [
-                      RichText(
-                        text: const TextSpan(
-                            text: 'ব্রান্ডঃ ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(100, 100, 100, 1),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            children: [
-                              // TextSpan(text: ' ' * 5),
-                              TextSpan(
-                                text: 'প্রিঞ্জেলস',
+                      const Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "প্রিঞ্জেলস অনিওন চিপস ৪২ গ্রাম",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Row(
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RichText(
+                            text: const TextSpan(
+                                text: 'ব্রান্ডঃ ',
                                 style: TextStyle(
-                                    color: Color.fromRGBO(50, 50, 50, 1),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ]),
+                                  color: Color.fromRGBO(100, 100, 100, 1),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  // TextSpan(text: ' ' * 5),
+                                  TextSpan(
+                                    text: 'প্রিঞ্জেলস',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(50, 50, 50, 1),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ]),
+                          ),
+                          const SizedBox(width: 5),
+                          Container(
+                            height: 6,
+                            width: 6,
+                            decoration: const BoxDecoration(
+                                color: Color.fromRGBO(218, 32, 121, 1),
+                                shape: BoxShape.circle),
+                          ),
+                          const SizedBox(width: 5),
+                          RichText(
+                            text: const TextSpan(
+                                text: 'ডিস্ট্রিবিউটরঃ ',
+                                style: TextStyle(
+                                  color: Color.fromRGBO(100, 100, 100, 1),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                children: [
+                                  // TextSpan(text: ' ' * 5),
+                                  TextSpan(
+                                    text: 'মোঃ মোবারাক হোসেন',
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(50, 50, 50, 1),
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                ]),
+                          ),
+                        ],
                       ),
                       Container(
-                        height: 6,
-                        width: 6,
-                        decoration: const BoxDecoration(
-                            color: Color.fromRGBO(218, 32, 121, 1),
-                            shape: BoxShape.circle),
-                      ),
-                      RichText(
-                        text: const TextSpan(
-                            text: 'ডিস্ট্রিবিউটরঃ ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(100, 100, 100, 1),
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                        margin: const EdgeInsets.only(
+                          top: 10,
+                          // bottom: 25,
+                          // left: 5,
+                          // right: 5,
+                        ),
+                        // padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(255, 255, 255, 1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 10, bottom: 10, left: 10, right: 10),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text(
+                                        'ক্রয়মূল্যঃ',
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(218, 32, 121, 1),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '৳ 220',
+                                        style: TextStyle(
+                                            color:
+                                                Color.fromRGBO(218, 32, 121, 1),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: const [
+                                      Text(
+                                        'বিক্রয়মূল্যঃ',
+                                        style: TextStyle(
+                                            // color: Color.fromRGBO(218, 32, 121, 1),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '৳ 250',
+                                        style: TextStyle(
+                                            // color: Color.fromRGBO(218, 32, 121, 1),
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                            children: [
-                              // TextSpan(text: ' ' * 5),
-                              TextSpan(
-                                text: 'মোঃ মোবারাক হোসেন',
+
+                            // dashed divider.
+                            Row(
+                              children: <Widget>[
+                                for (var i = 0; i < 150 ~/ 2; i++)
+                                  Expanded(
+                                    child: Container(
+                                      height: 1,
+                                      color: i % 2 == 0
+                                          ? Colors.transparent
+                                          : Colors.grey.shade400,
+                                    ),
+                                  )
+                              ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 5, bottom: 10, left: 10, right: 10),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: const [
+                                  Text(
+                                    'লাভঃ',
+                                    style: TextStyle(
+                                        // color: Color.fromRGBO(218, 32, 121, 1),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    '৳ 30',
+                                    style: TextStyle(
+                                        // color: Color.fromRGBO(218, 32, 121, 1),
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'বিস্তারিত',
                                 style: TextStyle(
-                                    color: Color.fromRGBO(50, 50, 50, 1),
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ]),
+                                    fontSize: 17, fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 5),
+                              Text(
+                                'জীবের মধ্যে সবচেয়ে সম্পূর্ণতা মানুষের। কিন্তু সবচেয়ে অসম্পূর্ণ হয়ে সে জন্মগ্রহণ করে। বাঘ ভালুক তার জীবনযাত্রার পনেরো- আনা মূলধন নিয়ে আসে প্রকৃতির মালখানা থেকে। জীবরঙ্গভূমিতে মানুষ এসে দেখা দেয় দুই শূন্য হাতে মুঠো বেঁধে।',
+                                style: TextStyle(
+                                  color: Color.fromRGBO(100, 100, 100, 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(
-                      top: 5,
-                      bottom: 25,
-                      left: 7.5,
-                      right: 7.5,
-                    ),
-                    // padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                  Positioned(
+                    top: 80,
                     child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10, bottom: 10, left: 10, right: 10),
-                          child: Column(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'ক্রয়মূল্যঃ',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(218, 32, 121, 1),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    '৳ 220',
-                                    style: TextStyle(
-                                        color: Color.fromRGBO(218, 32, 121, 1),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: const [
-                                  Text(
-                                    'বিক্রয়মূল্যঃ',
-                                    style: TextStyle(
-                                        // color: Color.fromRGBO(218, 32, 121, 1),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    '৳ 250',
-                                    style: TextStyle(
-                                        // color: Color.fromRGBO(218, 32, 121, 1),
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        // dashed divider.
-                        Row(
-                          children: <Widget>[
-                            for (var i = 0; i < 150 ~/ 2; i++)
-                              Expanded(
-                                child: Container(
-                                  height: 1,
-                                  color: i % 2 == 0
-                                      ? Colors.transparent
-                                      : Colors.grey.shade400,
-                                ),
-                              )
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 5, bottom: 10, left: 10, right: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
-                                'লাভঃ',
-                                style: TextStyle(
-                                    // color: Color.fromRGBO(218, 32, 121, 1),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                '৳ 30',
-                                style: TextStyle(
-                                    // color: Color.fromRGBO(218, 32, 121, 1),
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        QuantityButtonBar(),
+                        SizedBox(height: 5),
+                        CartHexButton(),
                       ],
                     ),
                   ),
