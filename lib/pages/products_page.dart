@@ -1,4 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:qtec_shop/models/models.dart';
 import 'package:qtec_shop/widgets/widgets.dart';
 
 class ProductsPage extends StatelessWidget {
@@ -6,6 +10,7 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _fetchProducts();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -61,5 +66,22 @@ class ProductsPage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+Future<List<Product>> _fetchProducts() async {
+  const productOffset = 10;
+  final response = await http.get(Uri.parse(
+      "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$productOffset"));
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> json = jsonDecode(response.body);
+    // return products.
+    return [
+      for (Map<String, dynamic> e in json["data"]["products"]["results"])
+        Product.fromJson(e)
+    ];
+  } else {
+    throw Exception(
+        "[${response.statusCode}] Couldn't fetch the api response!");
   }
 }
