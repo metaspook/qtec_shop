@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_shop/cubit/products_cubit.dart';
 import 'package:qtec_shop/pages/products_page.dart';
 
 void main() {
@@ -20,7 +22,10 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: const Color.fromRGBO(247, 242, 255, 1),
       ),
-      home: const ProductsPage(),
+      home: BlocProvider<ProductsCubit>(
+        create: (context) => ProductsCubit()..getProducts(),
+        child: const ProductsPage(),
+      ),
     );
   }
 }

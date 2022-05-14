@@ -7,9 +7,11 @@ class ProductCard extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.stock,
-      required this.inCart})
+      required this.inCart,
+      required this.image})
       : super(key: key);
   final String title;
+  final String image;
   final int stock;
   final bool inCart;
 
@@ -35,7 +37,6 @@ class ProductCard extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      print('object');
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -48,15 +49,18 @@ class ProductCard extends StatelessWidget {
                         // left: 10,
                         // right: 10,
                         top: 10,
+                        // bottom: 10,
                       ),
                       child: Column(
                         children: [
-                          Image.asset(
-                            "assets/images/potato_chips_00.png",
-                            width: 75,
-                          ),
+                          Image.network(image),
+                          // Image.asset(
+                          //   "assets/images/potato_chips_00.png",
+                          //   width: 75,
+                          // ),
                           const SizedBox(height: 10),
-                          Text(title, style: _ProductCardTextStyle.title),
+                          Text(title,
+                              maxLines: 2, style: _ProductCardTextStyle.title),
                           const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +149,7 @@ class ProductCard extends StatelessWidget {
                 )
               : Positioned(
                   // top: -10,
-                  bottom: 5,
+                  bottom: -3,
                   // right: 0,
                   child: Transform.scale(
                     scaleX: .65,

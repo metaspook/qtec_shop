@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_shop/cubit/products_cubit.dart';
 import 'package:qtec_shop/models/models.dart';
 import 'package:qtec_shop/widgets/widgets.dart';
 
@@ -10,7 +9,7 @@ class ProductsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _fetchProducts();
+    // _fetchProducts();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -42,46 +41,39 @@ class ProductsPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              physics: const BouncingScrollPhysics(),
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(left: 7, right: 7, bottom: 20),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                // mainAxisSpacing: 0,
-                mainAxisExtent: 260,
-              ),
-              itemCount: 20,
-              itemBuilder: (BuildContext context, int index) {
-                return ProductCard(
-                  title: index != 0
-                      ? 'লেস ক্লাসিক ফ্যামিলি সাইজ চিপস্ চিপস্'
-                      : 'Lays Classic Family Chips',
-                  stock: index != 0 ? 10 : 0,
-                  inCart: index != 1 ? false : true,
+            child: BlocBuilder<ProductsCubit, List<Product>>(
+                builder: (context, products) {
+              if (products.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator.adaptive(),
                 );
-              },
-            ),
+              }
+              return GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+                padding: const EdgeInsets.only(left: 7, right: 7, bottom: 20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 7,
+                  mainAxisExtent: 303,
+                ),
+                itemCount: products.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ProductCard(
+                    title: products[index].productName,
+                    image: products[index].image,
+                    // index != 0
+                    //     ? 'লেস ক্লাসিক ফ্যামিলি সাইজ চিপস্ চিপস্'
+                    //     : 'Lays Classic Family Chips',
+                    stock: index != 0 ? 10 : 0,
+                    inCart: index != 1 ? false : true,
+                  );
+                },
+              );
+            }),
           ),
         ],
       ),
     );
-  }
-}
-
-Future<List<Product>> _fetchProducts() async {
-  const productOffset = 10;
-  final response = await http.get(Uri.parse(
-      "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$productOffset"));
-  if (response.statusCode == 200) {
-    final Map<String, dynamic> json = jsonDecode(response.body);
-    // return products.
-    return [
-      for (Map<String, dynamic> e in json["data"]["products"]["results"])
-        Product.fromJson(e)
-    ];
-  } else {
-    throw Exception(
-        "[${response.statusCode}] Couldn't fetch the api response!");
   }
 }
