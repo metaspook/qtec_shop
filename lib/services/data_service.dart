@@ -14,8 +14,8 @@ class DataService {
       final Map<String, dynamic> json =
           jsonDecode(utf8.decode(response.bodyBytes));
       // return products.
-      print(response.headers);
-      print(json["data"]["products"]["results"][2]["product_name"]);
+      // print(response.headers);
+      // print(json["data"]["products"]["results"][2]["product_name"]);
       return [
         for (Map<String, dynamic> e in json["data"]["products"]["results"])
           Product.fromJson(e)

@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hexagon/hexagon.dart';
 
 class CartHexButton extends StatelessWidget {
-  CartHexButton({Key? key}) : super(key: key);
+  CartHexButton(this.inCart, {Key? key}) : super(key: key);
 
-  bool inCart = false;
+  final bool inCart;
   int cartItemCount = 5;
   @override
   Widget build(BuildContext context) {
