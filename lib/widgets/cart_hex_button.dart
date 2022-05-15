@@ -5,7 +5,7 @@ import 'package:hexagon/hexagon.dart';
 class CartHexButton extends StatelessWidget {
   CartHexButton({Key? key}) : super(key: key);
 
-  bool inCart = true;
+  bool inCart = false;
   int cartItemCount = 5;
   @override
   Widget build(BuildContext context) {

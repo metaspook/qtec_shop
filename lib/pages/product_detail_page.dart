@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:qtec_shop/widgets/cart_hex_button.dart';
-import 'package:qtec_shop/widgets/quantity_button_bar.dart';
 
 class ProductDetailPage extends StatefulWidget {
   const ProductDetailPage({Key? key}) : super(key: key);
@@ -306,7 +305,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const QuantityButtonBar(),
+                        // const QuantityButtonBar(),
                         const SizedBox(height: 5),
                         CartHexButton(),
                       ],

@@ -23,8 +23,8 @@ class Product {
   final String brandName;
   final String image;
   final num currentCharge;
-  final num sellingPrice;
-  final num profit;
+  final num? sellingPrice;
+  final num? profit;
   final List<DetailImage> images;
   final String productName;
   final String description;

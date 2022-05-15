@@ -54,13 +54,15 @@ class ProductsPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 7, right: 7, bottom: 20),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 7,
-                  mainAxisExtent: 303,
+                  mainAxisSpacing: 3,
+                  mainAxisExtent: 309,
                 ),
                 itemCount: products.length,
                 itemBuilder: (BuildContext context, int index) {
+                  // print("তীর চিনিগুড়া চাল-১ কেজি");
+                  // print(products[2].productName);
                   return ProductCard(
-                    title: products[index].productName,
+                    title: products[index].productName.toString(),
                     image: products[index].image,
                     // index != 0
                     //     ? 'লেস ক্লাসিক ফ্যামিলি সাইজ চিপস্ চিপস্'

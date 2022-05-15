@@ -5,11 +5,17 @@ import 'package:qtec_shop/models/models.dart';
 
 class DataService {
   Future<List<Product>> fetchProducts([int offset = 10]) async {
-    final response = await http.get(Uri.parse(
-        "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$offset"));
+    final response = await http.get(
+      Uri.parse(
+          "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$offset"),
+      // headers: {"content-type": "application/json; charset=utf-8"}
+    );
     if (response.statusCode == 200) {
-      final Map<String, dynamic> json = jsonDecode(response.body);
+      final Map<String, dynamic> json =
+          jsonDecode(utf8.decode(response.bodyBytes));
       // return products.
+      print(response.headers);
+      print(json["data"]["products"]["results"][2]["product_name"]);
       return [
         for (Map<String, dynamic> e in json["data"]["products"]["results"])
           Product.fromJson(e)

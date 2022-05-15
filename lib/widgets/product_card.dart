@@ -143,13 +143,13 @@ class ProductCard extends StatelessWidget {
           inCart == true
               ? const Positioned(
                   // top: -10,
-                  bottom: 10,
+                  bottom: 15,
                   // right: 0,
                   child: QuantityButtonBar(),
                 )
               : Positioned(
                   // top: -10,
-                  bottom: -3,
+                  // bottom: 0,
                   // right: 0,
                   child: Transform.scale(
                     scaleX: .65,
