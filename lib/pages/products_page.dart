@@ -61,15 +61,7 @@ class ProductsPage extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   // print("তীর চিনিগুড়া চাল-১ কেজি");
                   // print(products[2].productName);
-                  return ProductCard(
-                    title: products[index].productName.toString(),
-                    image: products[index].image,
-                    // index != 0
-                    //     ? 'লেস ক্লাসিক ফ্যামিলি সাইজ চিপস্ চিপস্'
-                    //     : 'Lays Classic Family Chips',
-                    stock: index != 0 ? 10 : 0,
-                    inCart: index != 1 ? false : true,
-                  );
+                  return ProductCard(products[index]);
                 },
               );
             }),

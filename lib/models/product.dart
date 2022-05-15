@@ -19,24 +19,12 @@ import 'detail_image.dart';
 //     "seller": "AKCG"
 
 class Product {
-  final int id;
-  final String brandName;
-  final String image;
-  final num currentCharge;
-  final num? sellingPrice;
-  final num? profit;
-  final List<DetailImage> images;
-  final String productName;
-  final String description;
-  final int maximumOrder;
-  final int stock;
-  final String seller;
-
   Product({
     required this.id,
     required this.brandName,
     required this.image,
     required this.currentCharge,
+    required this.discountCharge,
     required this.sellingPrice,
     required this.profit,
     required this.images,
@@ -46,6 +34,19 @@ class Product {
     required this.stock,
     required this.seller,
   });
+  final int id;
+  final String brandName;
+  final String image;
+  final num currentCharge;
+  final num discountCharge;
+  final num? sellingPrice;
+  final num? profit;
+  final List<DetailImage> images;
+  final String productName;
+  final String description;
+  final int maximumOrder;
+  final int stock;
+  final String seller;
 
   // create model object from json object.
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -54,6 +55,7 @@ class Product {
       brandName: json["brand"]["name"],
       image: json["image"],
       currentCharge: json["charge"]["current_charge"],
+      discountCharge: json["charge"]["discount_charge"] ?? 0,
       sellingPrice: json["charge"]["selling_price"],
       profit: json["charge"]["profit"],
       images: [for (var e in json["images"]) DetailImage.fromJson(e)],
@@ -74,6 +76,7 @@ class Product {
       "brandName": brandName,
       "image": image,
       "currentCharge": currentCharge,
+      "discountCharge": discountCharge,
       "sellingPrice": sellingPrice,
       "profit": profit,
       "images": images,
