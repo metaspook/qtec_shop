@@ -3,9 +3,12 @@ import 'package:qtec_shop/cubit/cubit.dart';
 
 class BlocProviders {
   BlocProviders._();
-  static final myApp = [
+  static final myApp = <BlocProvider>[
     BlocProvider<ProductsCubit>(
-      create: (context) => ProductsCubit()..getProducts(),
+      create: (_) => ProductsCubit()..getProducts(),
+    ),
+    BlocProvider<CartCounterState>(
+      create: (_) => CartCounterState(),
     ),
   ];
 }

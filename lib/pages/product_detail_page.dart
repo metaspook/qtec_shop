@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_shop/cubit/cubit.dart';
 import 'package:qtec_shop/models/models.dart';
 import 'package:qtec_shop/widgets/widgets.dart';
 
@@ -9,6 +11,9 @@ class ProductDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(context.watch<CartCounterState>().state.toString());
+    final cartProductCount = context.watch<CartCounterState>().state;
+
     bool inCart = true;
     final List<Widget> imageSlides = [
       product.images[0].image,
@@ -56,9 +61,16 @@ class ProductDetailPage extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     _DetailColumn(product),
-                    if (inCart)
-                      const Positioned(top: 90, child: QuantityButtonBar()),
-                    Positioned(top: 125, child: CartHexButton(inCart)),
+                    if (cartProductCount > 0)
+                      const Positioned(
+                          top: 90, child: QuantityButtonBar(quantity: 5)),
+                    Positioned(
+                        top: 125,
+                        child: BlocBuilder<CartCounterState, int>(
+                          builder: (context, state) {
+                            return CartHexButton(state);
+                          },
+                        )),
                   ],
                 ),
               ),

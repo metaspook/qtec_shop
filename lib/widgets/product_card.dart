@@ -8,6 +8,8 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Container(
       // color: Colors.black,
 
@@ -42,86 +44,92 @@ class ProductCard extends StatelessWidget {
             ),
           );
         },
-        child: Column(
-          children: [
-            // CachedNetworkImage(
-            //   imageUrl: product.image,
-            //   placeholder: (context, url) => const LinearProgressIndicator(),
-            //   errorWidget: (context, url, error) => const Icon(Icons.error),
-            // ),
-            Flexible(
-                // flex: 15,
-                // fit: FlexFit.tight,
-                // maxHeight: 100,
-                // maxWidth: 100,
-                // constraints:
-                //     const BoxConstraints(maxHeight: 150, maxWidth: 200),
+        child: SingleChildScrollView(
+          reverse: true,
+          physics: const NeverScrollableScrollPhysics(),
+          child: Column(
+            children: [
+              // CachedNetworkImage(
+              //   imageUrl: product.image,
+              //   placeholder: (context, url) => const LinearProgressIndicator(),
+              //   errorWidget: (context, url, error) => const Icon(Icons.error),
+              // ),
+              LimitedBox(
+                // constraints: const BoxConstraints.loose(
+                maxHeight: 800,
+                maxWidth: 500,
+                // minHeight: 50,
+                // minWidth: 50,
+                // ),
                 child: Image.network(
-              product.image,
-              fit: BoxFit.fitHeight,
-              // height: 100,
-              // width: 200,
-            )),
-            // Image.asset(
-            //   "assets/images/potato_chips_00.png",
-            //   width: 75,
-            // ),
-            const SizedBox(height: 10),
-            Text(product.productName,
-                maxLines: 2, style: _ProductCardTextStyle.title),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(
-                      text: 'ক্রয়s',
-                      style: _ProductCardTextStyle.priceTitle,
-                      children: [
-                        TextSpan(text: ' ' * 5),
-                        TextSpan(
-                          text: '\$ ${product.currentCharge}',
-                          style: _ProductCardTextStyle.priceBig,
-                        )
-                      ]),
+                  product.image,
+
+                  // fit: BoxFit.fitHeight,
+                  // height: 100,
+                  // width: 200,
                 ),
-                Text(
-                  '\$ ${product.discountCharge}',
-                  style: _ProductCardTextStyle.priceSecondary,
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RichText(
-                  text: TextSpan(
-                      text: 'বিক্রয়',
-                      style: _ProductCardTextStyle.priceTitle,
-                      children: [
-                        const TextSpan(text: '  '),
-                        TextSpan(
-                          text: '\$ ${product.sellingPrice}',
-                          style: _ProductCardTextStyle.pricePrimary,
-                        )
-                      ]),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: 'লাভ',
-                      style: _ProductCardTextStyle.priceTitle,
-                      children: [
-                        const TextSpan(text: '  '),
-                        TextSpan(
-                          text: '\$ ${product.profit}',
-                          style: _ProductCardTextStyle.pricePrimary,
-                        )
-                      ]),
-                ),
-              ],
-            ),
-            // const SizedBox(height: 25),
-          ],
+              ),
+              // Image.asset(
+              //   "assets/images/potato_chips_00.png",
+              //   width: 75,
+              // ),
+              const SizedBox(height: 10),
+              Text(product.productName,
+                  maxLines: 2, style: _ProductCardTextStyle.title),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: 'ক্রয়s',
+                        style: _ProductCardTextStyle.priceTitle,
+                        children: [
+                          TextSpan(text: ' ' * 5),
+                          TextSpan(
+                            text: '\$ ${product.currentCharge}',
+                            style: _ProductCardTextStyle.priceBig,
+                          )
+                        ]),
+                  ),
+                  Text(
+                    '\$ ${product.discountCharge}',
+                    style: _ProductCardTextStyle.priceSecondary,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  RichText(
+                    text: TextSpan(
+                        text: 'বিক্রয়',
+                        style: _ProductCardTextStyle.priceTitle,
+                        children: [
+                          const TextSpan(text: '  '),
+                          TextSpan(
+                            text: '\$ ${product.sellingPrice}',
+                            style: _ProductCardTextStyle.pricePrimary,
+                          )
+                        ]),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                        text: 'লাভ',
+                        style: _ProductCardTextStyle.priceTitle,
+                        children: [
+                          const TextSpan(text: '  '),
+                          TextSpan(
+                            text: '\$ ${product.profit}',
+                            style: _ProductCardTextStyle.pricePrimary,
+                          )
+                        ]),
+                  ),
+                ],
+              ),
+              // const SizedBox(height: 25),
+            ],
+          ),
         ),
       ),
     );

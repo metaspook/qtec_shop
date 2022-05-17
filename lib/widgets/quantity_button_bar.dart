@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_shop/cubit/cubit.dart';
 
 class QuantityButtonBar extends StatelessWidget {
-  const QuantityButtonBar({Key? key}) : super(key: key);
+  const QuantityButtonBar({
+    Key? key,
+    required this.quantity,
+    this.maxQuantity,
+  }) : super(key: key);
+
+  final int quantity;
+  final int? maxQuantity;
+  // final VoidCallback? onPressedDecrement;
 
   @override
   Widget build(BuildContext context) {
+    final cartProductCount = context.watch<CartCounterState>().state;
     return Container(
       // padding:
       //     const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
@@ -27,7 +38,9 @@ class QuantityButtonBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: cartProductCount != 0
+                  ? () => context.read<CartCounterState>().decrement(quantity)
+                  : null,
               icon: Icon(
                 Icons.remove,
                 size: 10,
@@ -55,7 +68,12 @@ class QuantityButtonBar extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: maxQuantity != null
+                  ? maxQuantity! > cartProductCount
+                      ? () =>
+                          context.read<CartCounterState>().increment(quantity)
+                      : null
+                  : () => context.read<CartCounterState>().increment(quantity),
               icon: Icon(
                 Icons.add,
                 size: 10,
