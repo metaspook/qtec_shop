@@ -16,19 +16,14 @@ class ProductDetailPage extends StatelessWidget {
     final cartProductCount = context.watch<CartCounterState>().state;
 
     bool inCart = true;
-    final List<Widget> imageSlides = [
-      product.images[0].image,
-      'https://www.factroom.ru/wp-content/uploads/2019/04/5-osobennostej-klimata-pitera-o-kotoryh-vy-dolzhny-znat-esli-sobiraetes-syuda-priekhat.jpg',
-      product.images[0].image,
-      'https://cdn.flixbus.de/2018-01/munich-header-d8_0.jpg',
-      product.images[0].image
-    ]
+    final List<Widget> imageSlides = product.images
         .map(
           (item) => Container(
             margin: const EdgeInsets.all(5.0),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.network(item, fit: BoxFit.cover, width: 250)),
+                child:
+                    Image.network(item.image, fit: BoxFit.cover, width: 250)),
           ),
         )
         .toList(growable: false);
@@ -39,43 +34,39 @@ class ProductDetailPage extends StatelessWidget {
         foregroundColor: const Color.fromRGBO(50, 50, 50, 1),
         shadowColor: Colors.transparent,
       ),
-      body: Column(
+      body: ListView(
+        // shrinkWrap: true,
         children: [
           const SearchBar(),
-          ListView(
-            shrinkWrap: true,
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  viewportFraction: .65,
-                  aspectRatio: 1.5,
-                  enlargeCenterPage: true,
-                  initialPage:
-                      product.images.indexWhere((element) => element.isPrimary),
-                ),
-                items: imageSlides,
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    _DetailColumn(product),
-                    if (cartProductCount > 0)
-                      const Positioned(
-                          top: 90, child: QuantityButtonBar(quantity: 5)),
-                    Positioned(
-                        top: 125,
-                        child: BlocBuilder<CartCounterState, int>(
-                          builder: (context, state) {
-                            return CartHexButton(state);
-                          },
-                        )),
-                  ],
-                ),
-              ),
-            ],
+          CarouselSlider(
+            options: CarouselOptions(
+              viewportFraction: .65,
+              aspectRatio: 1.5,
+              enlargeCenterPage: true,
+              enableInfiniteScroll: true,
+              initialPage:
+                  product.images.indexWhere((element) => element.isPrimary),
+            ),
+            items: imageSlides,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                _DetailColumn(product),
+                if (cartProductCount > 0)
+                  const Positioned(
+                      top: 90, child: QuantityButtonBar(quantity: 5)),
+                Positioned(
+                    top: 125,
+                    child: BlocBuilder<CartCounterState, int>(
+                      builder: (context, state) {
+                        return CartHexButton(state);
+                      },
+                    )),
+              ],
+            ),
           ),
         ],
       ),
