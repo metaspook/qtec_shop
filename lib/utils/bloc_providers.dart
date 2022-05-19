@@ -5,7 +5,7 @@ class BlocProviders {
   BlocProviders._();
   static final myApp = <BlocProvider>[
     BlocProvider<ProductsCubit>(
-      create: (_) => ProductsCubit()..getProducts(),
+      create: (_) => ProductsCubit(),
     ),
     BlocProvider<CartCounterState>(
       create: (_) => CartCounterState(),
