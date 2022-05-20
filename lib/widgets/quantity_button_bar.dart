@@ -15,7 +15,7 @@ class QuantityButtonBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartProductCount = context.watch<CartCounterState>().state;
+    final cartProductCount = context.watch<CartCounterCubit>().state;
     return Container(
       // padding:
       //     const EdgeInsets.symmetric(horizontal: 2, vertical: 5),
@@ -39,7 +39,7 @@ class QuantityButtonBar extends StatelessWidget {
             ),
             child: IconButton(
               onPressed: cartProductCount != 0
-                  ? () => context.read<CartCounterState>().decrement(quantity)
+                  ? () => context.read<CartCounterCubit>().decrement(quantity)
                   : null,
               icon: Icon(
                 Icons.remove,
@@ -71,9 +71,9 @@ class QuantityButtonBar extends StatelessWidget {
               onPressed: maxQuantity != null
                   ? maxQuantity! > cartProductCount
                       ? () =>
-                          context.read<CartCounterState>().increment(quantity)
+                          context.read<CartCounterCubit>().increment(quantity)
                       : null
-                  : () => context.read<CartCounterState>().increment(quantity),
+                  : () => context.read<CartCounterCubit>().increment(quantity),
               icon: Icon(
                 Icons.add,
                 size: 10,

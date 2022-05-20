@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:qtec_shop/models/models.dart';
 import 'package:qtec_shop/pages/product_detail_page.dart';
@@ -72,22 +73,31 @@ class ProductCard extends StatelessWidget {
                           // minHeight: 50,
                           // minWidth: 50,
                           // ),
-                          child: Image.network(
-                            product!.image,
-
-                            // fit: BoxFit.fitHeight,
-                            // height: 100,
-                            // width: 200,
+                          child: CachedNetworkImage(
+                            imageUrl: product!.image,
+                            progressIndicatorBuilder:
+                                (context, url, downloadProgress) =>
+                                    CircularProgressIndicator.adaptive(
+                                        value: downloadProgress.progress),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
                           ),
+                          // Image.network(
+                          // product!.image,
+
+                          // fit: BoxFit.fitHeight,
+                          // height: 100,
+                          // width: 200,
+                          // ),
                         ),
                         // Image.asset(
                         //   "assets/images/potato_chips_00.png",
                         //   width: 75,
                         // ),
-                        const SizedBox(height: 10),
-                        Text(product!.productName,
+                        const SizedBox(height: 5),
+                        Text(product!.productName + '\n',
                             maxLines: 2, style: _ProductCardTextStyle.title),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 5),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

@@ -13,9 +13,7 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print(context.watch<CartCounterState>().state.toString());
-    final cartProductCount = context.watch<CartCounterState>().state;
-
-    bool inCart = true;
+    final cartProductCount = context.watch<CartCounterCubit>().state;
     final List<Widget> imageSlides = product.images
         .map(
           (item) => Container(
@@ -60,7 +58,7 @@ class ProductDetailPage extends StatelessWidget {
                       top: 90, child: QuantityButtonBar(quantity: 5)),
                 Positioned(
                     top: 125,
-                    child: BlocBuilder<CartCounterState, int>(
+                    child: BlocBuilder<CartCounterCubit, int>(
                       builder: (context, state) {
                         return CartHexButton(state);
                       },

@@ -33,7 +33,7 @@ class CartHexButton extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: cartItemCount == 0
-            ? () => context.read<CartCounterState>().increment(5)
+            ? () => context.read<CartCounterCubit>().increment(5)
             : null,
         child: Row(
           children: [

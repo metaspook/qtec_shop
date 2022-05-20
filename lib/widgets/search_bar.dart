@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:qtec_shop/utils/utils.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:qtec_shop/cubit/cubit.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    print(XController.search.text);
     return Container(
       margin: const EdgeInsets.only(left: 15, right: 15, bottom: 25),
       padding: const EdgeInsets.only(left: 20, right: 5),
@@ -18,12 +18,8 @@ class SearchBar extends StatelessWidget {
         children: [
           Flexible(
             child: TextField(
-              onChanged: (value) {
-                Constants.queryString.value = value;
-                // Constants.queryString.notifyListeners();
-                // print(Constants.queryString.value);
-              },
-              // controller: XController.search,
+              onChanged: (value) =>
+                  context.read<SearchbarCubit>().setQuery(value),
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey.shade400),
                 hintText: 'কাঙ্ক্ষিত পণ্যটি খুঁজুন',
@@ -31,13 +27,11 @@ class SearchBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.search_rounded,
-              color: Colors.grey,
-            ),
-          )
+          const Icon(
+            Icons.search_rounded,
+            color: Colors.grey,
+          ),
+          const SizedBox(width: 10),
         ],
       ),
     );
