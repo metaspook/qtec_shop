@@ -3,20 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hexagon/hexagon.dart';
 import 'package:qtec_shop/cubit/cubit.dart';
+import 'package:qtec_shop/models/models.dart';
 
 class CartHexButton extends StatelessWidget {
-  const CartHexButton(this.cartItemCount, {Key? key}) : super(key: key);
-  final int cartItemCount;
-
-  double get _badgeSpace {
-    final badgeSpace = cartItemCount.toString().length.toDouble();
-    return badgeSpace * badgeSpace;
-  }
+  const CartHexButton(this.product, {Key? key}) : super(key: key);
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    final cartCubit = context.watch<CartCubit>();
+    //  method 1 (badge quantity by sum of products)
+    // final cartProductsCount = cartCubit.state.length;
+    //  method 2 (badge quantity by sum of products's quantity)
+    final cartProductsCount = <int>[
+      0,
+      ...cartCubit.state.map<int>((e) => e.quantity)
+    ].reduce((v, e) => v + e);
+
+    double badgeSpace = cartProductsCount.toString().length.toDouble();
+    badgeSpace *= badgeSpace;
     return Badge(
-      showBadge: cartItemCount != 0,
+      showBadge: cartCubit.containsProductById(product.id),
       badgeColor: const Color.fromRGBO(255, 204, 228, 1),
       padding: const EdgeInsets.all(6.5),
       position: BadgePosition.topEnd(top: 1),
@@ -26,15 +33,15 @@ class CartHexButton extends StatelessWidget {
           style: BorderStyle.solid), //BorderSide
 
       badgeContent: Text(
-        cartItemCount.toString(),
+        cartProductsCount.toString(),
         textAlign: TextAlign.center,
         style: const TextStyle(
             color: Color.fromRGBO(218, 32, 121, 1), fontSize: 13),
       ),
       child: GestureDetector(
-        onTap: cartItemCount == 0
-            ? () => context.read<CartCounterCubit>().increment(5)
-            : null,
+        onTap: cartCubit.containsProductById(product.id)
+            ? null
+            : () => context.read<CartCubit>().add(product),
         child: Row(
           children: [
             HexagonWidget.pointy(
@@ -57,7 +64,7 @@ class CartHexButton extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: cartItemCount != 0
+                    child: cartCubit.containsProductById(product.id)
                         ? Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: const [
@@ -85,9 +92,9 @@ class CartHexButton extends StatelessWidget {
                 ],
               ),
             ),
-            if (cartItemCount != 0)
+            if (cartProductsCount != 0)
               SizedBox(
-                width: _badgeSpace,
+                width: badgeSpace,
               ),
           ],
         ),

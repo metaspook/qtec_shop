@@ -13,7 +13,8 @@ class ProductDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print(context.watch<CartCounterState>().state.toString());
-    final cartProductCount = context.watch<CartCounterCubit>().state;
+    // final cartProductCount = context.watch<CartCounterCubit>().state;
+    // final cartProductCount = context.watch<CartCubit>().state.length;
     final List<Widget> imageSlides = product.images
         .map(
           (item) => Container(
@@ -53,16 +54,15 @@ class ProductDetailPage extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 _DetailColumn(product),
-                if (cartProductCount > 0)
-                  const Positioned(
-                      top: 90, child: QuantityButtonBar(quantity: 5)),
+                if (context.watch<CartCubit>().containsProductById(product.id))
+                  Positioned(
+                    top: 90,
+                    child: QuantityButtonBar(product.id),
+                  ),
                 Positioned(
-                    top: 125,
-                    child: BlocBuilder<CartCounterCubit, int>(
-                      builder: (context, state) {
-                        return CartHexButton(state);
-                      },
-                    )),
+                  top: 125,
+                  child: CartHexButton(product),
+                ),
               ],
             ),
           ),

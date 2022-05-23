@@ -34,7 +34,7 @@ class Product {
     required this.stock,
     required this.seller,
   });
-  final int id;
+  final String id;
   final String brandName;
   final String image;
   final num currentCharge;
@@ -51,7 +51,7 @@ class Product {
   // create model object from json object.
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-      id: json["id"],
+      id: json["id"].toString(),
       brandName: json["brand"]["name"],
       image: json["image"],
       currentCharge: json["charge"]["current_charge"],

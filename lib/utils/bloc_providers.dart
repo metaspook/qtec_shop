@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qtec_shop/cubit/cubit.dart';
-import 'package:qtec_shop/cubit/searchbar_cubit.dart';
 
 class BlocProviders {
   BlocProviders._();
@@ -13,6 +12,9 @@ class BlocProviders {
     ),
     BlocProvider<SearchbarCubit>(
       create: (_) => SearchbarCubit(),
+    ),
+    BlocProvider<CartCubit>(
+      create: (_) => CartCubit(),
     ),
   ];
 }
