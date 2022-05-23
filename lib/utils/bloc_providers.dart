@@ -7,9 +7,6 @@ class BlocProviders {
     BlocProvider<ProductsCubit>(
       create: (_) => ProductsCubit(),
     ),
-    BlocProvider<CartCounterCubit>(
-      create: (_) => CartCounterCubit(),
-    ),
     BlocProvider<SearchbarCubit>(
       create: (_) => SearchbarCubit(),
     ),
