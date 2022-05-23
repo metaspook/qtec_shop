@@ -96,25 +96,26 @@ class _ProductsViewState extends State<ProductsView> {
                       ? queryList.length + 2
                       : queryList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    final inCart = context
-                        .watch<CartCubit>()
-                        .containsProductById(queryList[index].id);
                     if (searchQuery.isEmpty && index >= queryList.length) {
                       return ProductCard.loading();
+                    } else {
+                      final inCart = context
+                          .watch<CartCubit>()
+                          .containsProductById(queryList[index].id);
+                      return Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          ProductCard(queryList[index]),
+                          if (queryList[index].stock != 0)
+                            inCart
+                                ? QuantityButtonBar(queryList[index].id)
+                                : Positioned(
+                                    bottom: -8,
+                                    child: Add2CartButton(queryList[index]),
+                                  ),
+                        ],
+                      );
                     }
-                    return Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        ProductCard(queryList[index]),
-                        if (queryList[index].stock != 0)
-                          inCart
-                              ? QuantityButtonBar(queryList[index].id)
-                              : Positioned(
-                                  bottom: -8,
-                                  child: Add2CartButton(queryList[index]),
-                                ),
-                      ],
-                    );
                   },
                 );
               },
