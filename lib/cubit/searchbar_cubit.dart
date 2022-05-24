@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
 
 class SearchbarCubit extends Cubit<String> {
-  SearchbarCubit() : super("");
+  SearchbarCubit() : super('');
 
-  void setQuery(String query) => emit(query);
+  void setQuery(String query) {
+    if (state != query) emit(query);
+  }
 }

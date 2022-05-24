@@ -33,6 +33,9 @@ class ProductsView extends StatefulWidget {
 
 class _ProductsViewState extends State<ProductsView> {
   final scrollController = ScrollController();
+  List<Product> queryProducts = [];
+  List<Product> products = [];
+  int offset = 0;
 
   @override
   void dispose() {
@@ -46,22 +49,20 @@ class _ProductsViewState extends State<ProductsView> {
     scrollController.addListener(() {
       if (scrollController.position.maxScrollExtent ==
           scrollController.offset) {
-        products.addAll(
-            (context.read<ProductsCubit>()..getProducts(offset += 10)).state);
+        products.addAll((context.read<ProductsCubit>()
+              ..getProducts(offset: offset += 10))
+            .state);
       }
     });
   }
 
-  int offset = 0;
-  List<Product> products = [];
-  List<Product> queryList = [];
-
   @override
   Widget build(BuildContext context) {
-    final searchQuery = context.watch<SearchbarCubit>().state;
+    final queryString = context.watch<SearchbarCubit>().state;
     if (products.isEmpty) {
-      products.addAll(
-          (context.watch<ProductsCubit>()..getProducts(offset += 10)).state);
+      products.addAll((context.watch<ProductsCubit>()
+            ..getProducts(offset: offset += 10))
+          .state);
     }
     return Expanded(
       child: products.isEmpty
@@ -70,48 +71,60 @@ class _ProductsViewState extends State<ProductsView> {
             )
           : LayoutBuilder(
               builder: (context, constraints) {
-                queryList = searchQuery.isNotEmpty
-                    ? [
-                        ...products.where(
-                          (product) => product.productName.contains(
-                            RegExp(
-                              searchQuery,
-                              caseSensitive: false,
-                              unicode: true,
-                            ),
+                if (queryString.isNotEmpty) {
+                  // query based search from 'slug' property.
+                  queryProducts = [
+                    ...products
+                        .where((product) => product.queryString == queryString)
+                  ];
+                  // string based search from 'product_name' property.
+                  if (queryProducts.isEmpty) {
+                    queryProducts = [
+                      ...products.where(
+                        (product) => product.productName.contains(
+                          RegExp(
+                            queryString,
+                            caseSensitive: false,
+                            unicode: true,
                           ),
-                        )
-                      ]
-                    : products;
+                        ),
+                      )
+                    ];
+                  }
+                } else {
+                  // fallback to all products.
+                  queryProducts = products;
+                }
                 return GridView.builder(
                   controller: scrollController,
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  padding: const EdgeInsets.only(left: 7, right: 7, bottom: 20),
+                  padding: const EdgeInsets.only(left: 5, right: 5, bottom: 20),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisExtent: constraints.maxHeight * .45,
                   ),
-                  itemCount: searchQuery.isEmpty
-                      ? queryList.length + 2
-                      : queryList.length,
+                  itemCount:
+                      //  queryString.isEmpty ?
+                      queryProducts.length + 2,
+                  // : queryList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    if (searchQuery.isEmpty && index >= queryList.length) {
+                    if (index >= queryProducts.length) {
                       return ProductCard.loading();
                     } else {
                       final inCart = context
                           .watch<CartCubit>()
-                          .containsProductById(queryList[index].id);
+                          .containsProductById(queryProducts[index].id);
                       return Stack(
                         alignment: Alignment.bottomCenter,
                         children: [
-                          ProductCard(queryList[index]),
-                          if (queryList[index].stock != 0)
+                          ProductCard(queryProducts[index]),
+                          if (queryProducts[index].stock != 0)
                             inCart
-                                ? QuantityButtonBar(queryList[index].id)
+                                ? QuantityButtonBar(queryProducts[index].id)
                                 : Positioned(
                                     bottom: -8,
-                                    child: Add2CartButton(queryList[index]),
+                                    child: Add2CartButton(queryProducts[index]),
                                   ),
                         ],
                       );

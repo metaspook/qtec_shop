@@ -22,6 +22,7 @@ class Product {
   Product({
     required this.id,
     required this.brandName,
+    required this.queryString,
     required this.image,
     required this.currentCharge,
     required this.discountCharge,
@@ -36,6 +37,7 @@ class Product {
   });
   final String id;
   final String brandName;
+  final String queryString;
   final String image;
   final num currentCharge;
   final num discountCharge;
@@ -53,6 +55,7 @@ class Product {
     return Product(
       id: json["id"].toString(),
       brandName: json["brand"]["name"],
+      queryString: json["brand"]["slug"],
       image: json["image"],
       currentCharge: json["charge"]["current_charge"],
       discountCharge: json["charge"]["discount_charge"] ?? 0,
@@ -74,6 +77,7 @@ class Product {
     return <String, dynamic>{
       "id": id,
       "brandName": brandName,
+      "queryString": queryString,
       "image": image,
       "currentCharge": currentCharge,
       "discountCharge": discountCharge,
