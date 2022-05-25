@@ -3,7 +3,7 @@ import 'package:qtec_shop/cubit/cubit.dart';
 
 class BlocProviders {
   BlocProviders._();
-  static final myApp = <BlocProvider>[
+  static final qtecShopApp = <BlocProvider>[
     BlocProvider<ProductsCubit>(
       create: (_) => ProductsCubit(),
     ),

@@ -54,15 +54,19 @@ class ProductDetailPage extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 _DetailColumn(product),
-                if (context.watch<CartCubit>().containsProductById(product.id))
+                if (product.stock != 0) ...[
+                  if (context
+                      .watch<CartCubit>()
+                      .containsProductById(product.id))
+                    Positioned(
+                      top: 90,
+                      child: QuantityButtonBar(product.id),
+                    ),
                   Positioned(
-                    top: 90,
-                    child: QuantityButtonBar(product.id),
+                    top: 125,
+                    child: CartHexButton(product),
                   ),
-                Positioned(
-                  top: 125,
-                  child: CartHexButton(product),
-                ),
+                ]
               ],
             ),
           ),
