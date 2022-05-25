@@ -14,6 +14,7 @@ A grocery item shop app.
 * Products GridView with bouncing scroll effect.
 * Infinity scroll with loader card.
 * Search by search query and product name.
+* Product image slider in details Page.
 * Add to Cart and quantity updater buttons in Products Page.
 * Stockout badge with product card.
 * Hexa Cart and quantity updater buttons in details Page.
