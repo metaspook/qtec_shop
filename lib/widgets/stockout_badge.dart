@@ -7,7 +7,6 @@ class StockoutBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10),
-      // height: 200,
       decoration: BoxDecoration(
         color: const Color.fromRGBO(255, 204, 204, 1),
         borderRadius: BorderRadius.circular(5),

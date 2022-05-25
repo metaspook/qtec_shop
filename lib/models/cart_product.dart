@@ -19,31 +19,6 @@ class CartProduct {
     required this.subTotal,
   });
 
-  // // create model object from json object.
-  // factory CartProduct.fromJson(Map<String, dynamic> json) {
-  //   return CartProduct(
-  //     productId: json["productId"],
-  //     productImage: json["productImage"],
-  //     productName: json["productName"],
-  //     quantity: json["quantity"] ?? 0,
-  //     maxOrderQuantity: json["maxOrderQuantity"] ?? 0,
-  //     unitPrice: json["unitPrice"] ?? 0,
-  //     subTotal: json["subTotal"] ?? 0,
-  //   );
-  // }
-
-  // // create json object from model object.
-  // Map<String, dynamic> toJson() {
-  //   return <String, dynamic>{
-  //     "productId": productId,
-  //     "productImage": productImage,
-  //     "productName": productName,
-  //     "quantity": quantity,
-  //     "unitPrice": unitPrice,
-  //     "subTotal": subTotal
-  //   };
-  // }
-
   factory CartProduct.fromProduct(
       {required Product product, required int quantity}) {
     return CartProduct(

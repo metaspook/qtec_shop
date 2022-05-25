@@ -15,11 +15,9 @@ class DataService {
       // headers: {"content-type": "application/json; charset=utf-8"}
     );
     if (response.statusCode == 200) {
+      // includes different language character workaround.
       final Map<String, dynamic> json =
           jsonDecode(utf8.decode(response.bodyBytes));
-      // return products.
-      // print(response.headers);
-      // print(json["data"]["products"]["results"][2]["product_name"]);
       return [
         for (Map<String, dynamic> e in json["data"]["products"]["results"])
           Product.fromJson(e)
