@@ -10,10 +10,9 @@ class DataService {
   Future<List<Product>> fetchProducts(
       {int offset = 0, String query = ''}) async {
     final response = await http.get(
-      Uri.parse(
-          "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$offset&search=$query"),
-      // headers: {"content-type": "application/json; charset=utf-8"}
-    );
+        Uri.parse(
+            "https://panel.supplyline.network/api/product/search-suggestions/?limit=10&offset=$offset&search=$query"),
+        headers: {"content-type": "application/json; charset=utf-8"});
     if (response.statusCode == 200) {
       // includes different language character workaround.
       final Map<String, dynamic> json =
