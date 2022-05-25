@@ -90,7 +90,7 @@ class _ProductsViewState extends State<ProductsView> {
                   // : queryList.length,
                   itemBuilder: (BuildContext context, int index) {
                     if (index >= queryProducts.length) {
-                      return ProductCard.loading();
+                      return const ProductCard.loading();
                     } else {
                       final inCart = context
                           .watch<CartCubit>()
