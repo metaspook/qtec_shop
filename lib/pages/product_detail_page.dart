@@ -91,8 +91,9 @@ class _DetailColumn extends StatelessWidget {
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
+          verticalDirection: VerticalDirection.down,
           children: [
             RichText(
               text: TextSpan(

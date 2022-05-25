@@ -9,12 +9,10 @@ class ProductCard extends StatelessWidget {
   const ProductCard.loading({Key? key})
       : product = null,
         super(key: key);
-
   final Product? product;
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     if (product != null) {
       return Stack(
         alignment: Alignment.bottomCenter,
@@ -82,7 +80,7 @@ class ProductCard extends StatelessWidget {
                               children: [
                                 const TextSpan(text: '  '),
                                 TextSpan(
-                                  text: '\$ ${product!.sellingPrice}',
+                                  text: '\$ ${product!.sellingPrice ?? 'N/A'}',
                                   style: _ProductCardTextStyle.pricePrimary,
                                 )
                               ]),
@@ -94,7 +92,7 @@ class ProductCard extends StatelessWidget {
                               children: [
                                 const TextSpan(text: '  '),
                                 TextSpan(
-                                  text: '\$ ${product!.profit}',
+                                  text: '\$ ${product!.profit ?? 'N/A'}',
                                   style: _ProductCardTextStyle.pricePrimary,
                                 )
                               ]),
@@ -170,8 +168,5 @@ class _ProductCardTextStyle {
   );
   static final stockStatus = TextStyle(
     color: Colors.pink.shade800,
-    // fontSize: 12,
-    // fontWeight: FontWeight.bold,
-    // decoration: TextDecoration.lineThrough,
   );
 }
