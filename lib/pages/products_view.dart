@@ -84,10 +84,7 @@ class _ProductsViewState extends State<ProductsView> {
                     crossAxisCount: 2,
                     mainAxisExtent: constraints.maxHeight * .45,
                   ),
-                  itemCount:
-                      //  queryString.isEmpty ?
-                      queryProducts.length + 2,
-                  // : queryList.length,
+                  itemCount: queryProducts.length + 2,
                   itemBuilder: (BuildContext context, int index) {
                     if (index >= queryProducts.length) {
                       return const ProductCard.loading();

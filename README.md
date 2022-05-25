@@ -4,16 +4,13 @@ A grocery item shop app.
 ><b>Platforms:</b> Android, iOS<br><b>Language/SDK:</b> Dart, Flutter
 
 ## **🎈 Screenshots**
-<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_00.jpg" width="204" height="430">&emsp;
 <img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_01.jpg" width="204" height="430">&emsp;
 <img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_02.jpg" width="204" height="430">&emsp;
-<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_03.jpg" width="204" height="430">&emsp;
+<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_03.jpg" width="204" height="430"><br>
 <img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_04.jpg" width="204" height="430">&emsp;
-<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_05.jpg" width="204" height="430">&emsp;
-<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_06.jpg" width="204" height="430"><br>
+<img alt="&nbsp;Missing screenshot!" src="screenshots/screenshot_05.jpg" width="204" height="430"><br>
 
 ## **🎈 Features**
-* State management: Bloc & Cubit.
 * Products GridView with bouncing scroll effect.
 * Infinity scroll with loader card.
 * Search by search query and product name.
@@ -26,6 +23,6 @@ A grocery item shop app.
 ## **🎈 Remarks**
 <details><summary>Click to collapse/fold.</summary>
 
+* State management: Bloc & Cubit.
 * Packages: flutter_bloc, equatable, cached_network_image, flutter_html, carousel_slider, http, badges, hexagon.
-
 </details>
